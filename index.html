@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Rajvansh — stories, biographies and history of the kings and dynasties of India.">
+<title>Rajvansh — History of Indian Kings</title>
+<style>
+:root{
+  --bg:#f7f2e8;--surface:#fffdf8;--text:#211b16;--muted:#76695d;
+  --accent:#a74720;--accent2:#d49a43;--line:#e4d8c8;--shadow:0 18px 50px rgba(49,31,17,.10);
+}
+[data-theme="dark"]{
+  --bg:#151210;--surface:#211c18;--text:#f6eee3;--muted:#b9aa9b;
+  --accent:#e77b4c;--accent2:#e0ad58;--line:#3c332c;--shadow:0 18px 50px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Georgia,"Times New Roman",serif;line-height:1.7}
+button,input{font:inherit}button{cursor:pointer}
+.container{width:min(1160px,92%);margin:auto}
+.topbar{border-bottom:1px solid var(--line);background:var(--surface);position:sticky;top:0;z-index:20}
+.nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{font-size:1.55rem;font-weight:800;letter-spacing:.5px;color:var(--text);text-decoration:none}
+.logo span{color:var(--accent)}
+.navlinks{display:flex;gap:24px;align-items:center}
+.navlinks a{color:var(--muted);text-decoration:none;font-family:Arial,sans-serif;font-size:.9rem}
+.navlinks a:hover{color:var(--accent)}
+.iconbtn{border:1px solid var(--line);background:transparent;color:var(--text);border-radius:50%;width:40px;height:40px}
+.hero{padding:85px 0 75px;background:
+ radial-gradient(circle at 85% 20%,rgba(212,154,67,.18),transparent 30%),
+ radial-gradient(circle at 10% 80%,rgba(167,71,32,.10),transparent 30%)}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:60px;align-items:center}
+.kicker{text-transform:uppercase;letter-spacing:3px;font:700 .72rem Arial,sans-serif;color:var(--accent)}
+h1{font-size:clamp(3rem,7vw,6.2rem);line-height:.98;margin:18px 0 25px;letter-spacing:-3px}
+.hero p{font-size:1.12rem;color:var(--muted);max-width:650px}
+.hero-card{min-height:390px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(145deg,#32170f,#8e4825 55%,#d49a43);box-shadow:var(--shadow);padding:35px;display:flex;flex-direction:column;justify-content:flex-end;color:white;position:relative;overflow:hidden}
+.hero-card:before{content:"ॐ";position:absolute;right:-20px;top:-60px;font-size:16rem;opacity:.08}
+.hero-card h2{font-size:2.4rem;line-height:1.1;margin:0}
+.hero-card p{color:#f8e8d4;margin-bottom:0}
+.section{padding:70px 0}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:28px}
+.section h2{font-size:2.4rem;margin:0}
+.section-head p{color:var(--muted);margin:0}
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+.search{flex:1;min-width:230px;border:1px solid var(--line);background:var(--surface);color:var(--text);padding:13px 16px;border-radius:12px;outline:none}
+.search:focus{border-color:var(--accent)}
+.filter{border:1px solid var(--line);background:var(--surface);color:var(--text);padding:11px 16px;border-radius:999px}
+.filter.active,.filter:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:.25s;box-shadow:0 5px 20px rgba(40,20,5,.04)}
+.card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.card-art{height:190px;padding:22px;display:flex;align-items:end;color:#fff;position:relative;overflow:hidden}
+.card-art:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent,rgba(0,0,0,.58))}
+.card-art .symbol{font-size:5rem;position:absolute;right:18px;top:0;opacity:.18}
+.card-art strong{position:relative;z-index:1;font-size:.75rem;letter-spacing:2px;text-transform:uppercase}
+.art-pratap{background:linear-gradient(135deg,#183f3a,#8d3f21)}
+.art-prithvi{background:linear-gradient(135deg,#45230e,#bd7a28)}
+.art-shivaji{background:linear-gradient(135deg,#26334e,#a74720)}
+.art-ashoka{background:linear-gradient(135deg,#6c3d12,#c79332)}
+.art-akbar{background:linear-gradient(135deg,#4a1834,#a74720)}
+.art-chandra{background:linear-gradient(135deg,#182f2b,#987034)}
+.card-body{padding:22px}
+.tag{color:var(--accent);font:700 .7rem Arial,sans-serif;text-transform:uppercase;letter-spacing:1.4px}
+.card h3{font-size:1.55rem;margin:8px 0}
+.card p{color:var(--muted);font-size:.95rem;margin:0 0 17px}
+.read{border:0;background:transparent;color:var(--accent);font:700 .9rem Arial,sans-serif;padding:0}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:50px}
+.about{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:55px}
+.about p{color:var(--muted)}
+.note{border-left:3px solid var(--accent2);padding:18px 22px;background:var(--bg);color:var(--muted)}
+footer{padding:35px 0;color:var(--muted);font: .85rem Arial,sans-serif}
+.footer{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;z-index:50;padding:30px 15px;overflow:auto}
+.modal.open{display:block}
+.reader{max-width:850px;margin:30px auto;background:var(--surface);border-radius:22px;overflow:hidden;box-shadow:var(--shadow)}
+.reader-head{padding:40px 42px 30px;background:linear-gradient(135deg,#35160e,#8c4524);color:#fff}
+.reader-head .tag{color:#ffd18c}.reader-head h2{font-size:clamp(2.2rem,5vw,4rem);line-height:1.05;margin:10px 0}
+.close{float:right;border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;border-radius:50%;width:38px;height:38px}
+.reader-body{padding:40px 42px;font-size:1.08rem}
+.reader-body h3{font-size:1.5rem;margin-top:32px;color:var(--accent)}
+.reader-body p{margin:0 0 18px}
+.credits{font-size:.88rem;color:var(--muted);border-top:1px solid var(--line);padding-top:20px;margin-top:30px}
+@media(max-width:850px){.hero-grid,.about-grid{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}.navlinks{display:none}.hero{padding-top:55px}}
+@media(max-width:560px){.grid{grid-template-columns:1fr}.section{padding:50px 0}h1{letter-spacing:-2px}.reader-head,.reader-body{padding:28px 22px}.hero-card{min-height:300px}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container nav">
+    <a class="logo" href="#">Raj<span>vansh</span></a>
+    <nav class="navlinks">
+      <a href="#stories">Stories</a><a href="#about">About</a>
+    </nav>
+    <button class="iconbtn" id="themeBtn" aria-label="Toggle dark mode">☾</button>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="kicker">India • History • Heritage</div>
+      <h1>Stories of the kings who shaped India.</h1>
+      <p>Explore biographies, dynasties, battles, ideas and legacies from ancient and medieval Indian history — presented as readable historical stories.</p>
+      <a href="#stories" style="display:inline-block;margin-top:18px;background:var(--accent);color:#fff;text-decoration:none;padding:13px 20px;border-radius:10px;font-family:Arial,sans-serif;font-weight:700">Explore Stories ↓</a>
+    </div>
+    <div class="hero-card">
+      <div class="kicker" style="color:#ffd18c">Featured theme</div>
+      <h2>From Maurya to Mewar, discover the past.</h2>
+      <p>Six sample articles are included. Replace or add articles directly in the JavaScript data below.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="stories">
+<div class="container">
+  <div class="section-head">
+    <div><div class="kicker">The collection</div><h2>Historical Stories</h2></div>
+    <p id="count"></p>
+  </div>
+  <div class="toolbar">
+    <input id="search" class="search" type="search" placeholder="Search kings, dynasties, battles...">
+    <button class="filter active" data-category="All">All</button>
+    <button class="filter" data-category="Ancient India">Ancient India</button>
+    <button class="filter" data-category="Medieval India">Medieval India</button>
+    <button class="filter" data-category="Rajput">Rajput</button>
+    <button class="filter" data-category="Maratha">Maratha</button>
+  </div>
+  <div class="grid" id="grid"></div>
+</div>
+</section>
+
+<section class="section about" id="about">
+<div class="container about-grid">
+  <div><div class="kicker">About Rajvansh</div><h2>A simple home for Indian history.</h2>
+  <p>Rajvansh is a sample editorial website for publishing accessible articles about Indian rulers, kingdoms, architecture, battles, administration and cultural history.</p></div>
+  <div class="note"><strong>Editorial note</strong><br>
+  Historical accounts can differ across chronicles and modern scholarship. Use reliable books, inscriptions, archaeological evidence and academic sources when expanding these sample articles. Dates and interpretations should be checked before publication.</div>
+</div>
+</section>
+</main>
+
+<footer><div class="container footer"><span>© <span id="year"></span> Rajvansh</span><span>Built as a single-file website • Ready for web hosting</span></div></footer>
+
+<div class="modal" id="modal" aria-hidden="true">
+  <article class="reader">
+    <div class="reader-head">
+      <button class="close" id="close">×</button>
+      <div class="tag" id="readerCategory"></div>
+      <h2 id="readerTitle"></h2>
+      <div id="readerMeta"></div>
+    </div>
+    <div class="reader-body" id="readerBody"></div>
+  </article>
+</div>
+
+<script>
+const articles = [
+{
+ id:"pratap", title:"Maharana Pratap", category:"Rajput", period:"1540–1597",
+ art:"art-pratap", symbol:"⚔",
+ excerpt:"The Mewar ruler remembered for his resistance, independence and the story of Haldighati.",
+ body:`
+ <p>Maharana Pratap was the ruler of Mewar in the sixteenth century and a prominent figure in the history of Rajput resistance. He belonged to the Sisodia lineage of Mewar and became ruler in 1572.</p>
+ <h3>Mewar and the Mughal Empire</h3>
+ <p>During Pratap's reign, the Mughal Empire under Akbar expanded its influence across large parts of northern and western India. Pratap did not accept Mughal authority over Mewar, leading to a prolonged conflict.</p>
+ <h3>The Battle of Haldighati</h3>
+ <p>The Battle of Haldighati took place in 1576. Mughal forces associated with Man Singh of Amber fought Pratap's army. The battle became one of the best-known episodes in the history of Mewar. Although the immediate military outcome is described differently in various accounts, Pratap continued resistance after the battle.</p>
+ <h3>Later years and legacy</h3>
+ <p>Pratap spent years rebuilding his position and recovered several areas of Mewar. He died in 1597. Later generations turned his life into a powerful symbol of independence, courage and attachment to Mewar.</p>
+ <div class="credits"><strong>Research note:</strong> For publication, compare regional chronicles with modern academic histories and archaeological evidence.</div>`
+},
+{
+ id:"prithvi", title:"Prithviraj Chauhan", category:"Rajput", period:"c. 12th century",
+ art:"art-prithvi", symbol:"♞",
+ excerpt:"The Chahamana ruler of Ajmer and Delhi whose life became the subject of many later traditions.",
+ body:`
+ <p>Prithviraj Chauhan, also known as Prithviraja III, was a ruler of the Chahamana (Chauhan) dynasty. He ruled from Ajmer and exercised authority in parts of present-day Rajasthan and northern India.</p>
+ <h3>Political landscape</h3>
+ <p>The twelfth century was marked by competition among several north Indian kingdoms as well as the expansion of Ghurid power from the northwest. Prithviraj's reign unfolded within this complex political environment.</p>
+ <h3>Tarain</h3>
+ <p>The Battles of Tarain, fought in 1191 and 1192, are central to accounts of Prithviraj's reign. In 1191, the forces of Prithviraj defeated Muhammad of Ghor. In the following year, Muhammad of Ghor returned and defeated Prithviraj's forces.</p>
+ <h3>History and legend</h3>
+ <p>Prithviraj became a celebrated figure in later literary traditions, especially the Prithviraj Raso. Historians distinguish between contemporary or near-contemporary evidence and later heroic narratives when reconstructing his life.</p>
+ <div class="credits"><strong>Research note:</strong> Dates, territorial claims and details vary among sources; distinguish inscriptional evidence from later literary tradition.</div>`
+},
+{
+ id:"shivaji", title:"Chhatrapati Shivaji Maharaj", category:"Maratha", period:"1630–1680",
+ art:"art-shivaji", symbol:"🚩",
+ excerpt:"The founder of the Maratha state, known for state-building, forts, administration and naval initiatives.",
+ body:`
+ <p>Chhatrapati Shivaji Maharaj founded a powerful Maratha state in western India during the seventeenth century. He was born in 1630, traditionally at Shivneri, and was the son of Shahaji Bhonsle and Jijabai.</p>
+ <h3>Building a state</h3>
+ <p>Shivaji developed a network of forts and local alliances while challenging the authority of larger regional powers. His campaigns and diplomacy helped create an expanding political base in the western Deccan.</p>
+ <h3>Administration and forts</h3>
+ <p>His government developed systems for revenue collection, military organization and fort management. Forts such as Raigad, Pratapgad and others became important centers of administration and defense.</p>
+ <h3>Coronation and legacy</h3>
+ <p>Shivaji was formally crowned at Raigad in 1674. His reign is associated with the development of a durable Maratha political identity. He died in 1680, while the state he built continued to evolve under later Maratha rulers and leaders.</p>
+ <div class="credits"><strong>Research note:</strong> The history of Shivaji includes extensive regional source traditions; compare contemporary records with later Marathi narratives.</div>`
+},
+{
+ id:"ashoka", title:"Emperor Ashoka", category:"Ancient India", period:"c. 3rd century BCE",
+ art:"art-ashoka", symbol:"☸",
+ excerpt:"The Mauryan emperor whose inscriptions provide a rare first-person window into an ancient Indian ruler's public policy.",
+ body:`
+ <p>Ashoka was a major ruler of the Mauryan Empire in the third century BCE. He inherited an extensive empire and is particularly known for inscriptions that survive on rocks and pillars across South Asia.</p>
+ <h3>The Kalinga War</h3>
+ <p>Ashoka's own inscriptions describe the suffering caused by the conquest of Kalinga. In later policy statements, he emphasized dhamma, a broad ethical program involving welfare, restraint, respect and concern for living beings.</p>
+ <h3>Inscriptions</h3>
+ <p>Ashoka's edicts are among the most important primary sources for ancient Indian history. They discuss administration, moral conduct, religious tolerance, welfare measures and the responsibilities of officials.</p>
+ <h3>Historical legacy</h3>
+ <p>Ashoka became an influential figure in the history of Buddhism and Indian political memory. The Lion Capital of Ashoka at Sarnath was adopted as India's State Emblem, while the Ashoka Chakra appears at the center of the national flag.</p>
+ <div class="credits"><strong>Research note:</strong> Ashoka's own edicts should be prioritized when discussing his policies; later Buddhist texts provide additional but different traditions.</div>`
+},
+{
+ id:"akbar", title:"Akbar", category:"Medieval India", period:"1542–1605",
+ art:"art-akbar", symbol:"✦",
+ excerpt:"The Mughal emperor whose long reign saw territorial expansion, administrative development and cultural exchange.",
+ body:`
+ <p>Akbar, born in 1542, became Mughal emperor in 1556. His reign lasted nearly fifty years and saw the Mughal state expand across much of northern and central India.</p>
+ <h3>Expansion and consolidation</h3>
+ <p>Akbar's reign included military campaigns, alliances and administrative reforms. Mughal authority expanded into Rajputana, Gujarat, Bengal and other regions over time, though the process involved both conflict and negotiation.</p>
+ <h3>Administration</h3>
+ <p>The Mughal administration under Akbar developed systems of revenue assessment and military ranking. The mansabdari system linked official rank with service and military obligations, while revenue reforms were associated with figures such as Raja Todar Mal.</p>
+ <h3>Culture and court</h3>
+ <p>Akbar's court became a major center of Persianate culture and artistic production. His reign is also remembered for discussions involving scholars and representatives of different religious traditions.</p>
+ <div class="credits"><strong>Research note:</strong> Avoid treating later court histories as neutral accounts; compare chronicles, administrative records and modern scholarship.</div>`
+},
+{
+ id:"chandra", title:"Chandragupta Maurya", category:"Ancient India", period:"c. 4th–3rd century BCE",
+ art:"art-chandra", symbol:"☼",
+ excerpt:"Founder of the Mauryan Empire and an important figure in the political transformation of ancient India.",
+ body:`
+ <p>Chandragupta Maurya is traditionally regarded as the founder of the Mauryan Empire. He established a large state in northern India around the end of the fourth century BCE.</p>
+ <h3>Rise of the Mauryan state</h3>
+ <p>Chandragupta's early life is described differently in later sources. What is clearer is the scale of the political transformation associated with his reign and the emergence of a centralized Mauryan power.</p>
+ <h3>Conflict with Seleucus</h3>
+ <p>Chandragupta later came into conflict with Seleucus I, one of the successors of Alexander the Great. The conflict ended in a settlement that strengthened Mauryan control in the northwest and was followed by diplomatic relations.</p>
+ <h3>Administration and legacy</h3>
+ <p>The Mauryan Empire became one of the largest political formations in ancient South Asian history. Greek accounts and later Indian traditions provide different perspectives on Chandragupta and his court.</p>
+ <div class="credits"><strong>Research note:</strong> The Arthashastra is important for studying ancient Indian political thought, but its dating and relationship to Chandragupta's exact administration remain subjects of scholarly discussion.</div>`
+}
+];
+
+const grid=document.getElementById("grid"), search=document.getElementById("search"), count=document.getElementById("count");
+let active="All";
+
+function render(){
+ const q=search.value.trim().toLowerCase();
+ const list=articles.filter(a=>(active==="All"||a.category===active) &&
+   (!q || (a.title+" "+a.category+" "+a.excerpt+" "+a.period).toLowerCase().includes(q)));
+ count.textContent=list.length+" stor"+(list.length===1?"y":"ies");
+ grid.innerHTML=list.length?list.map(a=>`
+ <article class="card">
+   <div class="card-art ${a.art}"><span class="symbol">${a.symbol}</span><strong>${a.period}</strong></div>
+   <div class="card-body"><div class="tag">${a.category}</div><h3>${a.title}</h3><p>${a.excerpt}</p>
+   <button class="read" onclick="openArticle('${a.id}')">Read full story →</button></div>
+ </article>`).join(""):`<div class="empty">No stories found. Try another search or category.</div>`;
+}
+function openArticle(id){
+ const a=articles.find(x=>x.id===id); if(!a)return;
+ document.getElementById("readerCategory").textContent=a.category;
+ document.getElementById("readerTitle").textContent=a.title;
+ document.getElementById("readerMeta").textContent=a.period;
+ document.getElementById("readerBody").innerHTML=a.body;
+ document.getElementById("modal").classList.add("open");
+ document.getElementById("modal").setAttribute("aria-hidden","false");
+ document.body.style.overflow="hidden";
+}
+function closeArticle(){
+ document.getElementById("modal").classList.remove("open");
+ document.getElementById("modal").setAttribute("aria-hidden","true");
+ document.body.style.overflow="";
+}
+document.querySelectorAll(".filter").forEach(btn=>btn.addEventListener("click",()=>{
+ document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
+ btn.classList.add("active");active=btn.dataset.category;render();
+}));
+search.addEventListener("input",render);
+document.getElementById("close").addEventListener("click",closeArticle);
+document.getElementById("modal").addEventListener("click",e=>{if(e.target.id==="modal")closeArticle()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeArticle()});
+document.getElementById("themeBtn").addEventListener("click",()=>{
+ const dark=document.documentElement.dataset.theme==="dark";
+ document.documentElement.dataset.theme=dark?"":"dark";
+ document.getElementById("themeBtn").textContent=dark?"☾":"☀";
+ localStorage.setItem("theme",dark?"light":"dark");
+});
+if(localStorage.getItem("theme")==="dark"){document.documentElement.dataset.theme="dark";document.getElementById("themeBtn").textContent="☀"}
+document.getElementById("year").textContent=new Date().getFullYear();
+render();
+</script>
+</body>
+</html>
